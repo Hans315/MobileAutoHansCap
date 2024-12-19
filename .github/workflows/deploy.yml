@@ -3,33 +3,41 @@ name: Build and Deploy Expo App
 on:
   push:
     branches:
-      - main # Menjalankan workflow setiap kali ada push ke branch `main`
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout Repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16 # Pastikan versi Node.js yang kompatibel dengan Expo
+          node-version: 16 # Pastikan versi Node.js kompatibel dengan Expo CLI
 
+      # 3. Install Dependencies
       - name: Install dependencies
         run: npm install
 
+      # 4. Install EAS CLI
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
+      # 5. Build App
       - name: Build app
         run: |
           eas build --platform android --non-interactive
-          eas build --platform ios --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
+      # 6. Upload Build
       - name: Upload build
         run: |
           eas submit --platform android --non-interactive
-          eas submit --platform ios --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
