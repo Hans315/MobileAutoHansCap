@@ -23,6 +23,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4f3354b2-a547-408c-9ac4-8b7bcb512567"
+      }
+    },
+    "owner": "hans911"
   }
 }
