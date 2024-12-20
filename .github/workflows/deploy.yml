@@ -34,10 +34,3 @@ jobs:
           eas build --platform android --non-interactive
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      # 6. Upload Build Using URL
-      - name: Upload build
-        run: |
-          eas submit --platform android --url https://expo.dev/artifacts/eas/xcUXThkxoW5PhKEqbFgHsd.aab --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
